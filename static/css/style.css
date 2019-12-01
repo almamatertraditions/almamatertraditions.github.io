@@ -4,7 +4,7 @@
   }
 
 h3 {
-  line-height: 125%
+  line-height: 140%
 }
 
 /* won't impact code, storing brand HEX CODES */
@@ -30,6 +30,11 @@ h3 {
       background-color: #24305E;
       color: #FFFFFF
     }
+
+  .slide:hover {
+    background-color: #24305E;
+    color: #FFFFFF
+  }
   
   .navbar-brand {
       color: white;
@@ -74,8 +79,7 @@ h3 {
     background-position: bottom center;
     background-size: cover;
   }
-  
-  
+
   .hero h1 {
     color: white;
     margin-top: 180px;
@@ -91,6 +95,35 @@ h3 {
     animation-delay: 1.2s;
   }
 
+  .mmb {
+    position: relative;
+    height: 1500px;
+    padding: 20px;
+    margin: 0;
+    background: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+                    rgba(0, 0, 0, 0.5)), 
+                      url("hero/mmb.jpg");
+    background-attachment: fixed;
+    background-position: bottom center;
+    background-size: cover;
+  }
+  
+   .mmb h1 {
+    color: white;
+    margin-top: 180px;
+    font-size: 0.1rem;
+    animation: title 1.2s forwards linear;
+  }
+  
+  .mmb p {
+    color: white;
+    font-size: 2rem;
+    opacity: 0;
+    animation: subtitle 1.2s forwards linear;
+    animation-delay: 1.2s;
+  }
+ 
   .romantic {
     position: relative;
     height: 600px;
