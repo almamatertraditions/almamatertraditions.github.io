@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<!-- HEAD -->
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Traditions of Alma Maters</title>
+
+        <link rel="icon" src="../images/favicon.png" sizes="16x16" type="image/png">
+
+                <!-- jQuery -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+                <!-- Leaflet CSS & JS -->
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+                integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+                crossorigin=""/>
+
+                <!-- Make sure you put this AFTER Leaflet's CSS -->
+                <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+                integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+                crossorigin=""></script>
+
+
+                <!--D3 cdn-->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
+        
+                <!-- BOOTSTRAP // CSS --> 
+                
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <link rel="stylesheet" type="text/css" href="../css/style.css">
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                    
+                <!-- jQuery -->
+                <script   src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
+        
+                <!-- Mabpox GL -->
+                <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.js'></script>
+                <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css' rel='stylesheet'>
+        
+                <!-- Mapbox.js (fallback) -->
+                <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+                <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+        
+        
+
+                <!-- Plot.js -->
+                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    </head>
+
+<!-- BODY --> 
+
+    <body class="body">
+
+ <!-- HEADER NAV MENU BAR -->
+ <header class="header">
+    <div class="container-fullwidth">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <nav class="navbar navbar-dark fixed-top navbar-expand-lg text-right"" >
+                    
+                    <!-- LANDING PAGE // LOGO -->
+                    <a class="navbar-brand" href="../../index.html">Alma Maters</a>
+                    <div id="navbarSupportedContent">
+                        <ul class="nav navbar-nav text-right">
+
+                            <!-- LANDING PAGE // INDEX.HOME -->
+                            <li class="nav-item text-right">
+                                <a class="nav-link text-muted" href="../../index.html">Home<span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            
+                            <!-- REPORT GENERATED FROM FLASK QUERY -->
+                            <li class="nav-item text-right">
+                                <a class="nav-link active" href="romanticroots.html">Romantic Roots</a>
+                            </li>
+
+                             <!-- Featured Queries -- Back-up if live data processes to slowly for the demo -->
+                             <li class="nav-item text-right">
+                                <a class="nav-link text-muted" href="yellowandblue.html">The Yellow and Blue</a>
+                            </li>
+                            
+                            <!-- TEMPLATES TAB // PRESENTATION -->
+                            <li class="nav-item text-right">
+                                <a class="nav-link text-muted" href="annielisle.html">Annie Lisle</a>
+                            </li>
+                            <!-- TEMPLATES TAB // ABOUT US -->
+                            <li class="nav-item text-right">
+                                    <a class="nav-link text-muted" href="conclusion.html">Conclusion</a>
+                                </li>
+                            <!-- TEMPLATES TAB // PRESENTATION -->
+                            <li class="nav-item text-right">
+                                <a class="nav-link text-muted" href="submit.html">Submit</a>
+                            </li>
+
+                            <!-- TEMPLATES DROPDOWN // STILL FIGURING OUT WHAT WE MIGHT NEED -->
+                            
+                            <!-- <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Data Walkthrough
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-muted" href="../acs_notebook">ACS 5-Year</a><br>
+                                        <a class="dropdown-item text-muted" href="../fec_notebook">FEC Donor Data</a><br>
+                                        <a class="dropdown-item text-muted" href="../mysql_db">MySQL Database</a><br>
+                                        <a class="dropdown-item text-muted" href="../aws_db">AWS BigQuery</a><br>
+                                    </div>
+                                    </li> -->
+                                    
+
+                            
+                        </ul>       
+                    </div>
+                </nav>   
+            </div>
+        </div>
+    </div>
+    <!-- WITH HERO BANNER INSTEAD OF MAP -->
+</header>
+    <div class="row">
+            <div class="romantic text-center">
+            
+                    <h1>Romantic Roots</h1>
+                    <p>In the 1800s, many US colleges and universities were founded establishing</br> 
+                        their own traditions and musical cultures. Romantic era pieces were used </br> 
+                        as the melody for alma maters which reveals that they were a part of oral </br> 
+                        traditions in the US and sung widely along with popular and religious tunes.</p>
+            
+            </div>
+        </div>
+        <div class="container-fluid">
+        
+                <div class="row" style="background-color: #24305E">
+                
+                    <div class="col-lg-1 col-md-1 col-sm-1"> 
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10"> 
+                           
+                                <h3 style="padding:75px; color:white">I thought the trend to have the 
+                                    melodies of alma maters borrowed from Romantic music was more widespread 
+                                    across the country from my biased experience in the Midwest. My alma mater 
+                                    is the University of Michigan so I was most familiar 
+                                    <a href="https://www.youtube.com/watch?v=k6b_DLbonb4" target="_blank">&#34;
+                                        The Yellow and Blue&#34;</a> (1886) 
+
+                                    based off of Michael William Balfe’s <em>The Enchantress</em>. I had also frequently 
+                                    heard neighboring Michigan State University’s 
+
+                                    <a href="https://www.youtube.com/watch?v=b0UsIQJzA-k" target="_blank">&#34;Shadows&#34;></a>
+
+                                     which resembles Donizetti’s&nbsp;
+
+                                    <a href="https://www.youtube.com/watch?v=TR1zzv9zIO8" target="_blank"><em>Lucia di Lammermoor</em></a>&nbsp;
+                                    
+                                    and Northwestern’s 
+                                    
+                                    <a href="https://www.youtube.com/watch?v=TR1zzv9zIO8" target="_blank">Hymn</a>
+
+                                    &nbsp;(1907) based on Haydn’s&nbsp;
+                                    <a href="https://www.youtube.com/watch?v=9FyL5u-4hIg> " target="_blank"><em>St. Anthony Chorale</em></a>
+                                    
+                                    which Brahms wrote a <a href="https://www.youtube.com/watch?v=9FyL5u-4hIg> " target="_blank">variation</a>. 
+                                    
+                                    Another notable example is the University of Wisconsin’s&nbsp;
+
+                                    <a href="https://www.youtube.com/watch?v=0jR6ix-Nzqw" target="_blank">&#34;Varsity&#34;</a>
+                                    
+                                    &nbsp;from the tune of Gounod’&nbsp;
+
+                                    <a href="https://www.youtube.com/watch?v=Xev65PDMXQU> " target="_blank">&#34;Domine Salvum Fac&#34;</a>
+                                    
+                                    &nbsp;from the St. Cecilia Mass, which was chosen by music 
+                                    professor Henry Dyke Sleeper to accompany lyrics he wrote. 
+                                    These midwestern schools likely had more contact due to 
+                                    being geographically close which could account 
+                                    for a similar practice in setting 
+                                    the alma mater to music from a classical genre. </br></br>
+
+                                    When looking at the alma maters I examined, I found borrowing the melody from classical music of the Romantic era was the fourth most common practice.
+                                    </br></br>
+
+                                    
+                                        </h3>
+                            
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1"> 
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>
+    
+        <div class="container-fluid">
+        
+                <div class="row" style="background-color: #FFFFFF">
+                
+                    <div class="col-lg-1 col-md-1 col-sm-1"> 
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10"> 
+                           
+                                <h3 style="padding:75px;">
+
+                                    <!-- <img src="../images/melodysource.png" style="width:100%; padding:25px"></br> -->
+                                    
+                                    <div id="sourceMelody"></div>
+                                    <script src="../js/sourceMelody.js" style="size:100%"></script></br></br>
+
+
+                                    This indicates that classical music was being 
+                                    circulated in university communities along with folk, popular, 
+                                    and religious music around the time alma maters were being written. 
+                                    Whereas, today, classical music is often reserved for the elite and 
+                                    for selected locations, like the concert hall or galas, classical 
+                                    music was in popular circulation with the middle class in the late 
+                                    19th century in America. Most alma maters were written in the late 19th/early 20th 
+                                    century and passed on through oral traditions and through university musical 
+                                    organizations. </br>
+                                
+                                        
+                                         </h3>
+                            
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1"> 
+                    </div>
+                
+                </div>
+            </div>
+    
+            <div class="container-fluid">
+        
+                    <div class="row" style="background-color: #24305E">
+                    
+                        <div class="col-lg-1 col-md-1 col-sm-1"> 
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10"> 
+                               
+                                    <h3 style="padding:75px; color:white">
+                                        
+                                        There are three main models for how alma maters came to be written 
+                                        1. The Glee Club wanted a new song or began singing a song that was 
+                                        adopted as the alma mater 2. The students or administrators were inspired 
+                                        by another school’s alma mater 3. The University held a song contest.</br> </br>
+                                        
+        
+    
+                                        
+                                            </h3>
+                                
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1"> 
+                        </div>
+                    
+                    </div>
+                </div>
+    
+            </div>
+            <div class="container-fluid">
+        
+                <div class="row" style="background-color: #FFFFFF">
+                
+                    <div class="col-lg-1 col-md-1 col-sm-1"> 
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10"> 
+                           
+                                <h3 style="padding:75px;">
+
+                                    Glee Clubs were advocates for school song repertoire. In many cases, 
+                                    glee club members would write alma maters because they wanted something 
+                                    to sing to represent their university community. The University of 
+                                    Virginia’s glee club president set words to “Auld Lang Syne” for their 
+                                    alma mater.  This is the case with Indiana University one of the first 
+                                    schools after Cornell to set the alma mater to the tune of “Annie Lisle.” 
+                                    The Indiana University alma mater was written for the glee club to have 
+                                    a song to sing in a competition with other schools. This suggests that 
+                                    glee clubs were competing with one another from different universities.   </br></br>
+                                
+                                        
+                                         </h3>
+                            
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1"> 
+                    </div>
+                
+                </div>
+            </div>
+            <div class="container-fluid">
+        
+                <div class="row" style="background-color: #24305E">
+                
+                    <div class="col-lg-1 col-md-1 col-sm-1"> 
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10"> 
+                           
+                                <h3 style="padding:75px; color:white">
+                                    
+                                    
+                                Schools often describe a situation after a sporting 
+                                event or other occasion in which students were directly 
+                                inspired by another school to create their own alma mater. 
+                                For example, after a football game in 1902, Ohio State students 
+                                were reportedly envious of their rival school Michigan for their 
+                                alma mater and glee club member Fred Cornell wrote the song on 
+                                the train ride home. Schools were likely to copy features of 
+                                other school’s alma maters that were geographically close or 
+                                who encountered one another regularly at sporting events or 
+                                glee club competitions.
+                                </br> </br>
+                                    
+    
+
+                                    
+                                        </h3>
+                            
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1"> 
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>
+        <div class="container-fluid">
+    
+            <div class="row" style="background-color: #FFFFFF">
+            
+                <div class="col-lg-1 col-md-1 col-sm-1"> 
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10"> 
+                       
+                            <h3 style="padding:75px;">
+
+                                The song contest model invited members of the 
+                                university community and alumni to send in poetry 
+                                to be chosen for the alma mater (often with a monetary reward). 
+                                The poem was set to music, most likely already in existence, although 
+                                sometimes later composed to fit the text. Notable examples include 
+                                Princeton University’s “Old Nassau” which was an original composition, 
+                                the University of Pennsylvania’s “Hail, Pennsylvania,” set to Russia’s 
+                                “God Save the Tsar!,” and the University of Michigan’s “The Yellow and Blue” 
+                                which will be covered more in depth on the next page.    </br></br>
+                            
+                                    
+                                     </h3>
+                        
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1"> 
+                </div>
+            
+            </div>
+        </div>
+        <div class="container-fluid">
+        
+            <div class="row" style="background-color: #24305E">
+            
+                <div class="col-lg-1 col-md-1 col-sm-1"> 
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10"> 
+                       
+                            <h3 style="padding:75px; color:white">
+                                
+                                The alma maters with Romantic melodies are some of 
+                                the more successful ones because the music had fewer 
+                                issues with harmony and voice leading than those originally 
+                                composed by students. These melodies were also deemed appropriate 
+                                for inspiring the right amount of nostalgia for university life. 
+                                Although, the idea of using a Romantic music melody seems to have 
+                                insularly circulated predominantly in the Midwest because these 
+                                schools compared themselves through frequent contact. These schools 
+                                copied the idea of what type of melody to use, however, the melody 
+                                itself was not directly copied as with “Annie Lisle” for example. 
+                                In addition, there is no trend of national derivation with classical 
+                                melodies adopted from Italian, English, French, and Austro-Germanic traditions. 
+                                Which shows a remarkable variety considering that, compared to the 
+                                East Coast, the Midwest had a relatively new classical music tradition 
+                                with the Detroit Opera House (1869), the Auditorium Theatre (1889), 
+                                and Chicago Symphony Orchestra (1891). Still, classical music was popular 
+                                as evidenced by the way these alma maters were circulated and 
+                                accepted as long-standing traditions. </br> </br>
+                                
+
+
+                                
+                                    </h3>
+                        
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1"> 
+                </div>
+            
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+
+<!-- Footer -->
+<footer class="page-footer font-small stylish-color-dark pt-4" style="background:#374785;">
+
+        <!-- Footer Links -->
+        <div class="container text-lg-left text-md-left">
+      
+          <!-- Grid row -->
+          <div class="row">
+      
+            <!-- Grid column -->
+            <div class="col-md-12 mx-auto" style="color:#FFFFFF;padding-top:25px">
+      
+              <!-- Content -->
+            
+              <u>References</u> </br>
+              Winstead, James Lloyd. <em>When Colleges Sang: The Story of Singing in American College Life</em>. Tuscaloosa: University of Alabama Press, 2013.
+      
+             </br></br>
+                
+            </div>
+            <!-- Grid column -->
+      
+      
+        <!-- Copyright -->
+        <div class="footer-copyright text-left py-3" style="color:#FFFFFF;padding-left:15px"> <p>Kari Lindquist 2019 © </p> 
+        </div>
+        <!-- Copyright -->
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      
+      </footer>
+    
+
+
+</html> 
